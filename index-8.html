@@ -1,0 +1,375 @@
+<?php
+// PHP code to handle session or user authentication can go here
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Glacial+Indifference&display=swap" rel="stylesheet">
+    <title>Design&Dine</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color:  #e4d426;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: #ffffff;
+            color: #e4d426;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.5rem; /* Increased font size */
+            font-weight: bold; /* Made text bold */
+            margin-bottom: 20px; /* Added more space below the paragraph */
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 0;
+        }
+
+        h2 {
+            color: #e4d426;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons Section */
+        #feature-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-button {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-button h3 {
+            font-size: 1.6rem;
+            color: #0d0d0e;
+            margin-bottom: 15px;
+        }
+
+        .feature-button p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .feature-button a {
+            background-color: #e4d426;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .feature-button a:hover {
+            background-color: #e4d426;
+        }
+
+        #meal-plan-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        #meal-plan-form form {
+            display: grid;
+            grid-gap: 15px;
+        }
+
+        #meal-plan-form label {
+            font-size: 1.1rem;
+        }
+
+        #meal-plan-form input {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #meal-plan-form button {
+            background-color: #e4d426;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #meal-plan-form button:hover {
+            background-color: #e4d426;
+        }
+
+        #meal-plan-results {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .meal-card {
+            flex: 1 1 calc(33.33% - 20px);
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .meal-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .meal-card h3 {
+            color: #6a4c9c;
+            margin-bottom: 10px;
+        }
+
+        .meal-card a {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #6a4c9c;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .meal-card a:hover {
+            background-color: #e4d426;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer a {
+            color: #f1f1f1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Top Nav */
+        .top-nav {
+            background-color: white;
+            border-bottom: 1px solid #e4d426;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: #e4d426;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #e7e4ec;
+            color: white;
+        }
+
+        /* Kiwi Image and Button */
+        .kiwi {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .kiwi-container {
+            position: relative;
+        }
+
+        .kiwi-text {
+            position: absolute;
+            top: 20px;
+            right: -100px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px black;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
+            background-color: darkgreen;
+            color: #e4d426;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .learn-more-btn:hover {
+            background-color: #333;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Logo Centering */
+        .logo-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-center img {
+            max-width: 1000px;
+            height: auto;
+            margin-bottom: -40px;
+            margin-left: 80px;
+        }
+
+        /* Call to Action */
+        .call_to_action {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .call_to_action p {
+            font-family: 'Glacial Indifference', sans-serif;
+            color: darkgreen;
+            font-size: 50px;
+            line-height: 1.5;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="nav-container">
+            <img src="logo.jpg" alt="Design&Dine Logo" class="logo">
+            <nav>
+                <a href="gen.php">PLANNING</a>
+                <a href="meal_plans.php">SAVED MEAL PLANS</a>
+                <a href="about.php">ABOUT</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <div class="call_to_action">
+            <p>Get personalized recipes based on what you have at home!</p>
+        </div>
+        <div class="kiwi-container">
+            <img src="kiwi.jpg" alt="Kiwi Image" class="kiwi">
+        </div>
+        <div class="container">
+            <div class="logo-center">
+                <img src="logo.jpg" alt="Design&Dine Logo">
+            </div>
+            <a href="gen.php" class="learn-more-btn">Generate Your Meal Plan</a>
+        </div>
+    </header>
+
+    <!-- Login/Register Section -->
+    <div style="background-color: #333; color: white; text-align: center; padding: 20px;">
+        <?php
+        if (isset($_SESSION['username'])) {
+            echo "<p>Welcome, " . $_SESSION['username'] . " | <a href='logout.php' style='color: #e4d426;'>Logout</a></p>";
+        } else {
+            echo "<p><a href='login.php' style='color: #e4d426; text-decoration: none;'>Login</a> | <a href='register.php' style='color: #e4d426; text-decoration: none;'>Register</a></p>";
+        }
+        ?>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>Design&Dine ©️ 2024. All rights reserved.</p>
+    </footer>
+</body>
+</html>
